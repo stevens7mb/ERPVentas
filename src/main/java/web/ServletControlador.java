@@ -52,11 +52,24 @@ public class ServletControlador extends HttpServlet {
 
     private void insertarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Recuperamos los valores del formulario agregarCliente
-        String ticket = request.getParameter("ticket");
-        String fechaInicioTarea = request.getParameter("fechaInicioTarea");
-        String fechaFinTarea = request.getParameter("fechaFinTarea");
+        //Recuperamos los valores del formulario agregarSucursal
+        String descripcion = request.getParameter("descripcion");
+        String rangoFacturacion = request.getParameter("rangoFacturacion");
+        String direccion = request.getParameter("direccion");
+        String fechaActualizacion = "2019-12-31";
+        String fechaIngreso = "2019-12-31";
+        String userIngreso = "Steven";
+        String userActualizacion = "Steven";
+        String restrictiva = "A";
 
+        Integer cEmpresa = 0;
+        String cEmpresaString = "2";
+        if (cEmpresaString != null && !"".equals(cEmpresaString)) {
+            cEmpresa = Integer.parseInt(cEmpresaString);
+        }
+
+
+        /*
         Integer item = 0;
         String itemString = request.getParameter("item");
         if (itemString != null && !"".equals(itemString)) {
@@ -81,15 +94,12 @@ public class ServletControlador extends HttpServlet {
         String idUsuarioString = request.getParameter("idUsuario");
         if (idUsuarioString != null && !"".equals(idUsuarioString)) {
             item = Integer.parseInt(idUsuarioString);
-        }
-//        String saldoString = request.getParameter("saldo");
-//        if (saldoString != null && !"".equals(saldoString)) {
-//            saldo = Double.parseDouble(saldoString);
-//        }
-        //Creamos el objeto de cliente(modelo)
-        Tarea tarea = new Tarea(ticket, fechaInicioTarea, fechaFinTarea, item, idSede, rda, idSitio, idUsuario);
+        }*/
+        //Creamos el objeto de sucursal(modelo)
+        //Sucursal sucursal = new Sucursal(descripcion, rangoFacturacion, direccion, fechaActualizacion, fechaIngreso, userIngreso, userActualizacion, restrictiva, cEmpresa);
+        Sucursal sucursal = new Sucursal(descripcion, rangoFacturacion, direccion, fechaActualizacion, fechaIngreso, userIngreso, userActualizacion, restrictiva, cEmpresa);
         //Insertamos el nuevo objeto en la base de datos
-        int registrosModificados = new TareaDaoJDBC().insertar(tarea);
+        int registrosModificados = new SucursalDaoJDBC().insertar(sucursal);
         System.out.println("registrosModificados = " + registrosModificados);
         //Redirigimos hacia accion por default
         this.accionDefault(request, response);

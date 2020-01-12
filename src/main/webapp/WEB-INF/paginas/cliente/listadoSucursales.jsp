@@ -8,7 +8,7 @@
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Tareas de Mantenimiento</h4>
+                            <h4>Sucursales</h4>
                         </div>
                         <table class="table table-responsive-xl table-striped">
                             <thead class="thead-dark">

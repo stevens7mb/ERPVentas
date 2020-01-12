@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-info text-white">
-                <h5 class="modal-title">Agregar Nueva Tarea</h5>
+                <h5 class="modal-title">Agregar Nueva Sucursal</h5>
                 <button class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
@@ -12,36 +12,16 @@
 
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="ticket">Ticket</label>
-                        <input type="text" class="form-control" name="ticket" required></input>
+                        <label for="descripcion">Descripcion</label>
+                        <input type="text" class="form-control" name="descripcion" required></input>
                     </div>
                     <div class="form-group">
-                        <label for="fechaInicioTarea">Fecha Inicio de Tarea</label>
-                        <input type="text" class="form-control" name="fechaInicioTarea" required></input>
+                        <label for="rangoFacturacion">Rango Facturacion</label>
+                        <input type="text" class="form-control" name="rangoFacturacion" required></input>
                     </div>
                     <div class="form-group">
-                        <label for="fechaFinTarea">Fecha Fin Tarea</label>
-                        <input type="text" class="form-control" name="fechaFinTarea" required></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="item">Item</label>
-                        <input type="text" class="form-control" name="item" required></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="idSede">ID de la Sede</label>
-                        <input type="text" class="form-control" name="idSede" required></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="rda">RDA</label>
-                        <input type="text" class="form-control" name="rda" required></input>
-                    </div>
-                     <div class="form-group">
-                        <label for="idSitio">ID del Sitio</label>
-                        <input type="text" class="form-control" name="idSitio" required></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="idUsuario">ID del Usuario</label>
-                        <input type="text" class="form-control" name="idUsuario" required></input>
+                        <label for="direccion">Direccion</label>
+                        <input type="text" class="form-control" name="direccion" required></input>
                     </div>
                     <!--
                     <div class="form-group">
