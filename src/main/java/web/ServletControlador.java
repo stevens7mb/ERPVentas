@@ -25,7 +25,7 @@ public class ServletControlador extends HttpServlet {
         if (accion != null) {
             switch (accion) {
                 case "editar":
-                    this.editarCliente(request, response);
+                    this.editarSucursal(request, response);
                     break;
                 case "eliminar":
                     this.eliminarCliente(request, response);
@@ -44,7 +44,7 @@ public class ServletControlador extends HttpServlet {
         System.out.println("sucursales =" + sucursales);
         HttpSession sesion = request.getSession();
         sesion.setAttribute("sucursales", sucursales);
-        //sesion.setAttribute("totalClientes", clientes.size());
+        sesion.setAttribute("totalSucursales", sucursales.size());
         //sesion.setAttribute("saldoTotal", this.calcularSaldoTotal(clientes));
         request.getRequestDispatcher("sucursales.jsp").forward(request, response);
         response.sendRedirect("sucursales.jsp");
@@ -105,23 +105,35 @@ public class ServletControlador extends HttpServlet {
         this.accionDefault(request, response);
     }
 
-    private void modificarCliente(HttpServletRequest request, HttpServletResponse response)
+    private void modificarSucursal(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Recuperamos los valores del formulario agregarCliente
-        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
-        String nombre = request.getParameter("nombre");
-        String apellido = request.getParameter("apellido");
-        String email = request.getParameter("email");
-        String telefono = request.getParameter("telefono");
+        //Recuperamos los valores del formulario agregarSucursal
+        int codigoSucursal = Integer.parseInt(request.getParameter("codigoSucursal"));
+        String descripcion = request.getParameter("descripcion");
+        String rangoFacturacion = request.getParameter("rangoFacturacion");
+        String direccion = request.getParameter("direccion");
+        String fechaActualizacion = "2019-12-31";
+        String fechaIngreso = "2019-12-31";
+        String userIngreso = "Steven";
+        String userActualizacion = "Steven";
+        String restrictiva = "A";
+
+        Integer cEmpresa = 0;
+        String cEmpresaString = "2";
+        if (cEmpresaString != null && !"".equals(cEmpresaString)) {
+            cEmpresa = Integer.parseInt(cEmpresaString);
+        }
+        
+        /*
         double saldo = 0;
         String saldoString = request.getParameter("saldo");
         if (saldoString != null && !"".equals(saldoString)) {
             saldo = Double.parseDouble(saldoString);
-        }
-        //Creamos el objeto de cliente(modelo)
-        Cliente cliente = new Cliente(idCliente, nombre, apellido, email, telefono, saldo);
+        }*/
+        //Creamos el objeto de sucursal(modelo)
+         Sucursal sucursal = new Sucursal(codigoSucursal, descripcion, rangoFacturacion, direccion, fechaActualizacion, fechaIngreso, userIngreso, userActualizacion, restrictiva, cEmpresa);
         //Moodificamos el objeto en la base de datos
-        int registrosModificados = new TareaDaoJDBC().actualizar(cliente);
+        int registrosModificados = new SucursalDaoJDBC().actualizar(sucursal);
         System.out.println("registrosModificados = " + registrosModificados);
         //Redirigimos hacia accion por default
         this.accionDefault(request, response);
@@ -150,7 +162,7 @@ public class ServletControlador extends HttpServlet {
                     this.insertarCliente(request, response);
                     break;
                 case "modificar":
-                    this.modificarCliente(request, response);
+                    this.modificarSucursal(request, response);
                     break;
                 default:
                     this.accionDefault(request, response);
@@ -160,13 +172,13 @@ public class ServletControlador extends HttpServlet {
         }
     }
 
-    private void editarCliente(HttpServletRequest request, HttpServletResponse response)
+    private void editarSucursal(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Recuperamos el idCliente
-        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
-        Cliente cliente = new TareaDaoJDBC().encontrar(new Cliente(idCliente));
-        request.setAttribute("cliente", cliente);
-        String jspEditar = "/WEB-INF/paginas/cliente/editarCliente.jsp";
+        int codigoSucursal = Integer.parseInt(request.getParameter("codigoSucursal"));
+        Sucursal sucursal = new SucursalDaoJDBC().encontrar(new Sucursal(codigoSucursal));
+        request.setAttribute("sucursal", sucursal);
+        String jspEditar = "/WEB-INF/paginas/cliente/editarSucursal.jsp";
         request.getRequestDispatcher(jspEditar).forward(request, response);
     }
 

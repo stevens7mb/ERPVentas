@@ -15,7 +15,7 @@
     <body>
         <!-- Cabecero-->
         <jsp:include page="/WEB-INF/paginas/comunes/cabecero.jsp"/> 
-        <form action="${pageContext.request.contextPath}/ServletControlador?accion=modificar&idCliente=${cliente.idCliente}"
+        <form action="${pageContext.request.contextPath}/ServletControlador?accion=modificar&codigoSucursal=${sucursal.codigoSucursal}"
               method="POST" class="was-validated">
             <!-- Botones de Navegacion-->
             <jsp:include page="/WEB-INF/paginas/comunes/botonesNavegacionEdicion.jsp"/>
@@ -26,29 +26,22 @@
                         <div class="col">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Editar Cliente</h4>
+                                    <h4>Editar Sucursal</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="nombre">Nombre</label>
-                                        <input type="text" class="form-control" name="nombre" required value="${cliente.nombre}"></input>
+                                        <label for="descripcion">Descripcion</label>
+                                        <input type="text" class="form-control" name="descripcion" required value="${sucursal.descripcion}"></input>
                                     </div>
                                     <div class="form-group">
-                                        <label for="apellido">Apellido</label>
-                                        <input type="text" class="form-control" name="apellido" required value="${cliente.apellido}"></input>
+                                        <label for="rangoFacturacion">Rango de Facturacion</label>
+                                        <input type="text" class="form-control" name="rangoFacturacion" required value="${sucursal.rangoFacturacion}"></input>
                                     </div>
                                     <div class="form-group">
-                                        <label for="Email">Email</label>
-                                        <input type="email" class="form-control" name="email" required value="${cliente.email}"></input>
+                                        <label for="direccion">Direccion</label>
+                                        <input type="direccion" class="form-control" name="direccion" required value="${sucursal.direccion}"></input>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="telefono">Telefono</label>
-                                        <input type="tel" class="form-control" name="telefono" required value="${cliente.telefono}"></input>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="saldo">Saldo</label>
-                                        <input type="nuber" class="form-control" name="saldo" required value="${cliente.saldo}" step="any"></input>
-                                    </div>
+                               
                                 </div>
                             </div>
                         </div>
