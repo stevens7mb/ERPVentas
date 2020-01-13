@@ -1,8 +1,6 @@
 package datos;
 
-import dominio.Cliente;
 import dominio.Sucursal;
-import dominio.Tarea;
 import java.sql.*;
 import java.util.*;
 
@@ -13,15 +11,17 @@ import java.util.*;
 public class SucursalDaoJDBC {
 
     private static final String SQL_SELECT = "SELECT CODIGO_SUCURSAL, DESCRIPCION, RANGO_FACTURACION, DIRECCION, FECHA_ACT, FECHA_ING, USER_ING, USER_ACT, RESTRICTIVA, C_EMPRESA "
-            + " FROM SUCURSAL";
+            + " FROM SUCURSAL WHERE RESTRICTIVA='S'";
     private static final String SQL_SELECT_BY_ID = "SELECT CODIGO_SUCURSAL, DESCRIPCION, RANGO_FACTURACION, DIRECCION, FECHA_ACT, FECHA_ING, USER_ING, USER_ACT, RESTRICTIVA, C_EMPRESA "
             + " FROM SUCURSAL WHERE CODIGO_SUCURSAL=?";
     private static final String SQL_INSERT = "INSERT INTO SUCURSAL(CODIGO_SUCURSAL, DESCRIPCION, RANGO_FACTURACION, DIRECCION, FECHA_ACT, FECHA_ING, USER_ING, USER_ACT, RESTRICTIVA, C_EMPRESA)"
             + "VALUES(?,?,?,?,?,?,?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE SUCURSAL "
             + " SET DESCRIPCION=?, RANGO_FACTURACION=?, DIRECCION=?, FECHA_ACT=?, FECHA_ING=?, USER_ING=?, USER_ACT=?, RESTRICTIVA=?, C_EMPRESA=? WHERE CODIGO_SUCURSAL=?";
-    private static final String SQL_DELETE = "DELETE FROM cliente WHERE idcliente = ?";
+    private static final String SQL_DELETE = "UPDATE SUCURSAL "
+            + " SET RESTRICTIVA='N' WHERE CODIGO_SUCURSAL=?";
 
+    //private static final String SQL_DELETE = "DELETE FROM cliente WHERE idcliente = ?";
     public List<Sucursal> listar() {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -120,16 +120,16 @@ public class SucursalDaoJDBC {
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setInt(1, sucursal.getCodigoSucursal());
-            stmt.setString(2, sucursal.getDescripcion());
-            stmt.setString(3, sucursal.getRangoFacturacion());
-            stmt.setString(4, sucursal.getDireccion());
-            stmt.setString(5, sucursal.getFechaActualizacion());
-            stmt.setString(6, sucursal.getFechaIngreso());
-            stmt.setString(7, sucursal.getUserIngreso());
-            stmt.setString(8, sucursal.getUserActualizacion());
-            stmt.setString(9, sucursal.getRestrictiva());
-            stmt.setInt(10, sucursal.getcEmpresa());
+            stmt.setString(1, sucursal.getDescripcion());
+            stmt.setString(2, sucursal.getRangoFacturacion());
+            stmt.setString(3, sucursal.getDireccion());
+            stmt.setString(4, sucursal.getFechaActualizacion());
+            stmt.setString(5, sucursal.getFechaIngreso());
+            stmt.setString(6, sucursal.getUserIngreso());
+            stmt.setString(7, sucursal.getUserActualizacion());
+            stmt.setString(8, sucursal.getRestrictiva());
+            stmt.setInt(9, sucursal.getcEmpresa());
+            stmt.setInt(10, sucursal.getCodigoSucursal());
             rows = stmt.executeUpdate();
 
         } catch (SQLException ex) {
@@ -141,14 +141,14 @@ public class SucursalDaoJDBC {
         return rows;
     }
 
-    public int eliminar(Cliente cliente) {
+    public int eliminar(Sucursal sucursal) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, cliente.getIdCliente());
+            stmt.setInt(1, sucursal.getCodigoSucursal());
             rows = stmt.executeUpdate();
 
         } catch (SQLException ex) {

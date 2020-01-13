@@ -8,13 +8,13 @@
             </div>
             <div class="col-md-3">
                 <button type="submit" class="btn btn-success btn-block">
-                    <i class="fas fa-check"></i> Guardar Cliente 
+                    <i class="fas fa-check"></i> Guardar Sucursal
                 </button>
             </div>
             <div class="col-md-3">
-                <a href="${pageContext.request.contextPath}/ServletControlador?accion=eliminar&idCliente=${cliente.idCliente}"
+                <a href="${pageContext.request.contextPath}/ServletControlador?accion=eliminar&codigoSucursal=${sucursal.codigoSucursal}"
                    class="btn btn-danger btn-block">
-                    <i class="fas fa-trash"></i> Eliminar Cliente
+                    <i class="fas fa-trash"></i> Eliminar Sucursal
                 </a>
             </div>
         </div>

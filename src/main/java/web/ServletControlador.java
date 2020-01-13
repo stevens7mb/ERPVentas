@@ -1,10 +1,7 @@
 package web;
 
 import datos.SucursalDaoJDBC;
-import datos.TareaDaoJDBC;
-import dominio.Cliente;
 import dominio.Sucursal;
-import dominio.Tarea;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -28,7 +25,7 @@ public class ServletControlador extends HttpServlet {
                     this.editarSucursal(request, response);
                     break;
                 case "eliminar":
-                    this.eliminarCliente(request, response);
+                    this.eliminarSucursal(request, response);
                     break;
                 default:
                     this.accionDefault(request, response);
@@ -60,7 +57,7 @@ public class ServletControlador extends HttpServlet {
         String fechaIngreso = "2019-12-31";
         String userIngreso = "Steven";
         String userActualizacion = "Steven";
-        String restrictiva = "A";
+        String restrictiva = "S";
 
         Integer cEmpresa = 0;
         String cEmpresaString = "2";
@@ -116,7 +113,7 @@ public class ServletControlador extends HttpServlet {
         String fechaIngreso = "2019-12-31";
         String userIngreso = "Steven";
         String userActualizacion = "Steven";
-        String restrictiva = "A";
+        String restrictiva = "S";
 
         Integer cEmpresa = 0;
         String cEmpresaString = "2";
@@ -139,14 +136,14 @@ public class ServletControlador extends HttpServlet {
         this.accionDefault(request, response);
     }
 
-    private void eliminarCliente(HttpServletRequest request, HttpServletResponse response)
+    private void eliminarSucursal(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Recuperamos los valores del formulario agregarCliente
-        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+        int codigoSucursal = Integer.parseInt(request.getParameter("codigoSucursal"));
         //Creamos el objeto de cliente(modelo)
-        Cliente cliente = new Cliente(idCliente);
-        //Eliminamos el objeto en la base de datos
-        int registrosModificados = new TareaDaoJDBC().eliminar(cliente);
+        Sucursal sucursal = new Sucursal(codigoSucursal);
+        //Eliminamos el objeto logicamente en la base de datos
+        int registrosModificados = new SucursalDaoJDBC().eliminar(sucursal);
         System.out.println("registrosModificados = " + registrosModificados);
         //Redirigimos hacia accion por default
         this.accionDefault(request, response);
@@ -182,11 +179,11 @@ public class ServletControlador extends HttpServlet {
         request.getRequestDispatcher(jspEditar).forward(request, response);
     }
 
-    private double calcularSaldoTotal(List<Cliente> clientes) {
+  /*  private double calcularSaldoTotal(List<Cliente> clientes) {
         double saldoTotal = 0;
         for (Cliente cliente : clientes) {
             saldoTotal += cliente.getSaldo();
         }
         return saldoTotal;
-    }
+    }*/
 }
